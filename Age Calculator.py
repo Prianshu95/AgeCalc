@@ -30,8 +30,8 @@ def age_cal():
 	days = dayE.get()
 	current_date = datetime.now().date()
 	birth_date = date(int(years), int(months), int(days))
-	result = f"Hey {user.title()}! {calculation(current_date, birth_date)}"
-	title = tk.Text(font="Helvetica, 12", width=10, height=5, wrap="word")
+	result = f"Hey {user.title()}! \n{calculation(current_date, birth_date)}"
+	title = tk.Text(font="Times 14", width=5, height=5, wrap="word")
 	title.grid(column=0, row=7, columnspan=2, padx=5, pady=5, sticky="news", ipadx=15, ipady=5)
 	title.delete(1.0, "end")
 	title.insert(tk.END, result)
@@ -45,9 +45,9 @@ def get_day():
 	day_s = dayE.get()
 	birth_date = date(int(years), int(months), int(day_s))
 	# have to repeat the above code bcz it wasn't working earlier
-	day_nm = calendar.day_name(birth_date.weekday())
-	msg = f"Hey {user}! The day on which you were born is-\n{day_nm}"
-	title = tk.Text(font="Calibre, 14", height=10, width=5)
+	day_nm = birth_date.strftime("%A")
+	msg = f"Hey {user.title()}!\nThe day on which you were born is-\n{day_nm}"
+	title = tk.Text(font="Times 14", height=5, width=5, wrap="word")
 	title.grid(column=0, row=7, columnspan=2, padx=5, pady=5, sticky="news")
 	title.delete(1.0, "end")
 	title.insert(tk.END, msg)
@@ -58,14 +58,14 @@ def calculation(first, second):
 	n_days = days.days
 	years = int(n_days / 365.25)
 	months = int((n_days % 365.25) / 30)
-	return f"Your age as of today is {years} year(s), {months} month(s)"
+	return f"Your age as of today is-\n{years} year(s), {months} month(s)"
 
 
 # buttons are here
 age_btn = tk.Button(window, text="Get Age", bg="green", fg="white", command=age_cal)
 age_btn.grid(column=0, row=4, columnspan=2, padx=2, pady=2, sticky="news")
-# day_btn = tk.Button(window, text="Get Day", bg="blue", fg="white", command=get_day)
-# day_btn.grid(column=0, row=5, columnspan=2, padx=2, pady=2, sticky="news")
+day_btn = tk.Button(window, text="Get Day", bg="blue", fg="white", command=get_day)
+day_btn.grid(column=0, row=5, columnspan=2, padx=2, pady=2, sticky="news")
 exit_btn = tk.Button(text="Exit", bg="grey", fg="white", command=lambda: window.destroy())
 exit_btn.grid(column=0, row=6, columnspan=2, padx=2, pady=2, sticky="news")
 
